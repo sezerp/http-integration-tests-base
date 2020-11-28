@@ -1,0 +1,39 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+    id 'groovy'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+}
+
+mainClassName = 'App'
+
+group 'com.pawelzabczynski'
+version '1.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    compile 'org.codehaus.groovy:groovy-all:2.4.15'
+    compile 'com.google.guava:guava:23.0'
+    compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'com.google.code.gson:gson:2.6.2'
+
+
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'io.rest-assured:rest-assured:3.2.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'io.rest-assured:json-path:3.2.0'
+    testCompile 'io.rest-assured:xml-path:3.2.0'
+}
+
+test {
+    systemProperty 'integration.test.port', System.getProperty('integration.test.port')
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
